@@ -1,13 +1,8 @@
 import express from "express";
-import { words } from "../constants/index.js";
+import fruitsController from "../controllers/fruits-controller.js";
 
-const randomWordsRoutes = express.Router();
+const randomFruitsRoutes = express.Router();
 
-randomWordsRoutes.get("/random-words", (req, res) => {
-  const randomIndex = Math.floor(Math.random() * words.length);
-  const randomWord = words[randomIndex];
-  console.log({ randomWord });
-  res.send({ message: randomWord });
-});
+randomFruitsRoutes.get("/random-words", fruitsController.getRandomFruit);
 
-export default randomWordsRoutes;
+export default randomFruitsRoutes;

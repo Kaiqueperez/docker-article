@@ -1,17 +1,17 @@
 import authService from "../service/auth-service.js";
 
-const signin = async (req, res) => {
+const signIn = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const token = authService.signin(email, password);
+    const token = await authService.signin(email, password);
     res.send(token);
   } catch (error) {
     res.status(401).json({ message: error.message });
   }
 };
 
-const signup = async (req, res) => {
+const signUp = async (req, res) => {
   const user = req.body;
 
   try {
@@ -23,6 +23,6 @@ const signup = async (req, res) => {
 };
 
 export default {
-  signin,
-  signup,
+  signIn,
+  signUp,
 };

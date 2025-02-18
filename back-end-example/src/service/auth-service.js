@@ -1,5 +1,6 @@
 import prisma from "../shared/prismaClient.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const authService = {
   signin: async (email, password) => {
@@ -38,7 +39,9 @@ const authService = {
       },
     });
 
-    return createdUser;
+    const { password, ...userWithoutPassword } = createdUser;
+
+    return userWithoutPassword;
   },
 };
 
