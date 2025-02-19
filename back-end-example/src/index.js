@@ -4,11 +4,14 @@ import routeAuth from "./routes/auth.js";
 import app from "./shared/express.js";
 import privateRoutes from "./routes/privateRoutes.js";
 import randomFruitsRoutes from "./routes/random-words.js";
+import cors from "cors";
 
 
 const PORT = 4001;
 
 app.use(express.json());
+
+app.use(cors());
 
 app.use(randomFruitsRoutes);
 
