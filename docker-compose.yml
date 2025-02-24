@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-example
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_DB: random-words
+    ports:
+      - "5432:5432"
+
+  backend-example:
+    container_name: backend-example
+    ports:
+      - "4001:4001"
+    build: ./back-end-example
+    depends_on:
+      - postgres
+    env_file:
+      - ./back-end-example/.env
+
+  frontend-example:
+    container_name: front-to-dockerizeds
+    ports:
+      - "3000:3000"
+    build: ./front-to-dockerizeds
+    volumes:
+      - front-volume:/var/www/html
+    depends_on:
+      - backend-example
+
+  nginx:
+    container_name: nginx-example
+    ports:
+      - "80:80"
+    build: ./nginx
+    volumes:
+      - front-volume:/var/www/html
+    depends_on:
+      - frontend-example
+
+volumes:
+  front-volume:
+  pgdata:
