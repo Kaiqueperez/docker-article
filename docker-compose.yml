@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres-example
+    container_name: pg-example
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -21,6 +21,7 @@ services:
       - postgres
     env_file:
       - ./back-end-example/.env
+    command: sh -c "npx prisma migrate deploy && npm run seed && npm start"
 
   frontend-example:
     container_name: front-to-dockerizeds
