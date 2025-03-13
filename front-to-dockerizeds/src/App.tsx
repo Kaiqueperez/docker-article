@@ -12,7 +12,8 @@ function App() {
   const [fruit, setFruit] = useState<FruitResponse>({} as FruitResponse);
 
   const getFruit = async () => {
-    const response = await fetch("http://localhost:4001/random-words");
+    const response = await fetch("http://3.14.249.9/random-words");
+
     const data = await response.json();
 
     setFruit(data.message);
